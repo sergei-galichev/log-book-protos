@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package application;
+
+option go_package = "./application_pb";
+
+import "google/api/annotations.proto";
+
+/* LogBook Service*/
+
+message LogBook {
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
+}
+
+message LogBookRequest {
+  string logbook_id = 1;
+}
+
+message LogBookResponse {
+  LogBook logbook = 1;
+}
+
+service LogBookService {
+  rpc ReadLogBook(LogBookRequest) returns (LogBookResponse){
+    option (google.api.http) = {
+      get: "/api/v1/logbook/{logbook_id}"
+    };
+  };
+}
+
+/* Authentication Service*/
+
+message User {
+  string uuid = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message LoginRequest {
+  User user = 1;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message RegisterRequest {
+  User user = 1;
+}
+
+message RegisterResponse {
+  int64 user_id = 1;
+}
+
+service AuthService {
+  rpc Login(LoginRequest) returns (LoginResponse){};
+  rpc Register(RegisterRequest) returns (RegisterResponse){};
+}
