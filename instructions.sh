@@ -1,6 +1,6 @@
 #!/bin/bash
 
-protoc -I proto proto/logbookpb/logbook.proto --go_out=./gen/go --go_opt=paths=source_relative \
+protoc -I proto proto/applicationpb/application.proto --go_out=./gen/go --go_opt=paths=source_relative \
        --go-grpc_out=./gen/go --go-grpc_opt=paths=source_relative \
        --grpc-gateway_out=./gen/go --grpc-gateway_opt=paths=source_relative
 # key -I: first param is the directory where the proto files are, second param is the proto file
